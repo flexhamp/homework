@@ -5,6 +5,6 @@ package ru.sbt.homework.home01;
  */
 public class Main {
     public static void main(String[] args) {
-
+        int test;
     }
 }
