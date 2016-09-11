@@ -10,4 +10,5 @@ public interface TruckManager {
     void del(Truck truck);
     List<Truck> listtruck();
     Truck getByNumber(int number);
+    void addAll(List<Truck> values);
 }

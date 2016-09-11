@@ -1,7 +1,6 @@
 package ru.sbt.homework.home01;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by user on 11.09.2016.
@@ -25,15 +24,59 @@ public class Main {
         //System.out.println(a1);
 
         TruckManager tm = new TruckManagerImpl();
-        tm.add(new Truck("Kamaz", 545, Type.BENZIN));
-        tm.add(new Truck("Kamaz", 543, Type.BENZIN));
-        tm.add(new Truck("Kamaz", 55, Type.BENZIN));
+        tm.add(new MegaTruck("Kamaz", 545, Type.BENZIN));
+        tm.add(new MegaTruck("Kamaz", 543, Type.BENZIN));
+        tm.add(new MegaTruck("Kamaz", 55, Type.BENZIN));
         tm.add(new Truck("Kamaz", 54, Type.BENZIN));
         tm.del(new Truck("Kamaz", 545, Type.BENZIN));
 
+        tm.addAll(Arrays.asList(new Truck("odin", 1, Type.BENZIN),
+                new MegaTruck("dva", 2, Type.DIESEL)));
+
+        List<Truck> tru = tm.listtruck();
+
+        Comparator<Truck> compareByNumber = new Comparator<Truck>() {
+            @Override
+            public int compare(Truck o1, Truck o2) {
+                if (o1.number < o2.number) {
+                    return -1;
+                } else if (o1.number > o2.number) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        };
+
+        Comparator<Truck> compareByName = new Comparator<Truck>() {
+            @Override
+            public int compare(Truck o1, Truck o2) {
+                if (o1.name.compareTo(o2.name) < 0) {
+                    return -1;
+                } else if (o1.name.compareTo(o2.name) > 0) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        };
+
+        Collections.sort(tru, compareByNumber);
+
+        for (Truck v:
+             tru) {
+            System.out.println(v);
+        }
+
+        System.out.println("================");
+        Collections.sort(tru, compareByName);
+        for (Truck v:
+                tru) {
+            System.out.println(v);
+        }
 
 
-        printTruck(tm);
+//        printTruck(tm);
 
 
 
@@ -48,4 +91,5 @@ public class Main {
         }
         System.out.println();
     }
+
 }
